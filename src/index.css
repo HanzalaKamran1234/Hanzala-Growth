@@ -340,11 +340,14 @@ main {
 }
 
 @media (max-width: 968px) {
+  .hero-section {
+    padding-top: 100px;
+  }
   .hero-container {
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding-top: 40px;
+    padding-top: 0;
     gap: 2.5rem;
   }
   .hero-left {
