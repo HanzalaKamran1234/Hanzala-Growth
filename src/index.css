@@ -217,8 +217,11 @@ main {
   z-index: 2;
 }
 
-.hero-content {
+.hero-left {
   max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .badge {
@@ -267,7 +270,7 @@ main {
 .hero-description {
   font-size: 1.2rem;
   color: var(--muted);
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
   max-width: 520px;
   line-height: 1.7;
 }
@@ -338,24 +341,46 @@ main {
 
 @media (max-width: 968px) {
   .hero-container {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     padding-top: 40px;
-    gap: 3rem;
+    gap: 2.5rem;
   }
-  .hero-content {
+  .hero-left {
+    display: contents;
+  }
+  .hero-text {
+    order: 1;
     margin: 0 auto;
-    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .hero-visual {
-    order: 1;
+    order: 2;
     max-width: 500px;
     margin: 0 auto;
+  }
+  .hero-actions {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
   .hero-ctas {
     justify-content: center;
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .trust-footer {
+    justify-content: center;
+  }
+  .badge {
+    margin-bottom: 1.5rem;
   }
 }
 

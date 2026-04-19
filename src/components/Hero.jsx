@@ -9,48 +9,57 @@ const Hero = () => {
       <div className="bg-bloom top-left"></div>
       <div className="bg-bloom bottom-right"></div>
       
-      <div className="container hero-container">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="hero-content"
-        >
-          <div className="badge">
-            <span className="dot"></span>
-            Join the Next Generation
-          </div>
-          
-          <h1 className="hero-title">
-            Helping Students Build <span className="text-accent-hero">Skills, Income & Growth</span> in the AI Era
-          </h1>
-          
-          <p className="hero-description">
-            I document my real journey as a CS student building valuable skills, online income, discipline, and future success.
-          </p>
-
-          <div className="hero-ctas">
-            <a href="https://www.instagram.com/hanzala.growth/" target="_blank" rel="noopener noreferrer" className="btn-primary">
-              <Instagram size={20} />
-              Follow Instagram
-            </a>
-            <button className="btn-secondary">
-              Get Free Growth Guide
-              <ArrowRight size={18} />
-            </button>
-          </div>
-
-          <div className="trust-footer">
-            <div className="avatars">
-              <div className="avatar"></div>
-              <div className="avatar"></div>
-              <div className="avatar"></div>
+    <div className="container hero-container">
+        <div className="hero-left">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="hero-text"
+          >
+            <div className="badge">
+              <span className="dot"></span>
+              Join the Next Generation
             </div>
-            <p className="trust-text">
-              Join <span className="highlight">1,000+</span> ambitious students building ahead of the crowd.
+            
+            <h1 className="hero-title">
+              Helping Students Build <span className="text-accent-hero">Skills, Income & Growth</span> in the AI Era
+            </h1>
+            
+            <p className="hero-description">
+              I document my real journey as a CS student building valuable skills, online income, discipline, and future success.
             </p>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="hero-actions"
+          >
+            <div className="hero-ctas">
+              <a href="https://www.instagram.com/hanzala.growth/" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                <Instagram size={20} />
+                Follow Instagram
+              </a>
+              <button className="btn-secondary">
+                Get Free Growth Guide
+                <ArrowRight size={18} />
+              </button>
+            </div>
+
+            <div className="trust-footer">
+              <div className="avatars">
+                <div className="avatar"></div>
+                <div className="avatar"></div>
+                <div className="avatar"></div>
+              </div>
+              <p className="trust-text">
+                Join <span className="highlight">1,000+</span> ambitious students building ahead of the crowd.
+              </p>
+            </div>
+          </motion.div>
+        </div>
 
         <motion.div 
           initial={{ opacity: 0, scale: 0.9, rotateY: 5 }}
