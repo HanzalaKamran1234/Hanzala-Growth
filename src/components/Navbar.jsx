@@ -13,7 +13,7 @@ const Navbar = ({ setView }) => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4' : 'py-6'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-black/20 ${scrolled ? 'py-4' : 'py-6'}`}>
       <div className={`container`}>
         <div className={`glass nav-pill flex items-center justify-between`}>
           <div className="logo-section" style={{cursor: 'pointer'}} onClick={() => { if(setView) setView('home'); window.location.hash = ''; }}>
@@ -35,7 +35,10 @@ const Navbar = ({ setView }) => {
             ))}
           </div>
 
-          <button className="btn-primary nav-cta">
+          <button 
+            className="btn-primary nav-cta"
+            onClick={() => { if(setView) setView('socials'); window.scrollTo(0,0); }}
+          >
             Join Circle
           </button>
         </div>

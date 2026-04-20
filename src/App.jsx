@@ -10,6 +10,7 @@ import SocialProof from './components/SocialProof';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
+import Socials from './components/Socials';
 
 function App() {
   const [view, setView] = React.useState('home');
@@ -20,11 +21,11 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      <Navbar setView={setView} />
+      {view !== 'socials' && <Navbar setView={setView} />}
       <main>
         {view === 'home' && (
           <>
-            <Hero />
+            <Hero setView={setView} />
             <TrustSection />
             <LearningPath />
             <FutureMonetization />
@@ -35,8 +36,9 @@ function App() {
         )}
         {view === 'privacy' && <PrivacyPolicy />}
         {view === 'terms' && <TermsOfService />}
+        {view === 'socials' && <Socials setView={setView} />}
       </main>
-      <Footer setView={setView} />
+      {view !== 'socials' && <Footer setView={setView} />}
     </div>
   );
 }

@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, ArrowRight } from 'lucide-react';
+import { Instagram, ArrowRight, CheckCircle } from 'lucide-react';
 import heroImage from '../assets/hero.png';
+import { sendEmail } from '../utils/sendEmail';
 
-const Hero = () => {
+const Hero = ({ setView }) => {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+
+  const handleGetGuide = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setStatus('loading');
+    try {
+      await sendEmail({
+        email,
+        subject: 'New Request: Free Growth Guide',
+        html: `<p>A new user has requested the Free Growth Guide.</p><p><strong>Email:</strong> ${email}</p>`
+      });
+      setStatus('success');
+      setEmail('');
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+    }
+  };
+
   return (
     <section className="hero-section" id="home">
       <div className="bg-bloom top-left"></div>
       <div className="bg-bloom bottom-right"></div>
       
-    <div className="container hero-container">
+      <div className="container hero-container">
         <div className="hero-left">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -37,15 +59,29 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="hero-actions"
           >
-            <div className="hero-ctas">
-              <a href="https://www.instagram.com/hanzala.growth/" target="_blank" rel="noopener noreferrer" className="btn-primary">
-                <Instagram size={20} />
-                Follow Instagram
-              </a>
-              <button className="btn-secondary">
-                Get Free Growth Guide
-                <ArrowRight size={18} />
-              </button>
+            <div className="hero-ctas" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <button 
+                  onClick={() => { if(setView) setView('socials'); window.scrollTo(0,0); }} 
+                  className="btn-primary"
+                >
+                  <Instagram size={20} />
+                  Social Accounts
+                </button>
+              </div>
+              <form onSubmit={handleGetGuide} style={{ display: 'flex', gap: '0.5rem', width: '100%', maxWidth: '400px' }}>
+                <input 
+                  type="email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter email for guide..." 
+                  required
+                  style={{ flex: 1, padding: '0.75rem 1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: 'white', outline: 'none' }} 
+                />
+                <button type="submit" className="btn-secondary" disabled={status === 'loading'} style={{ minWidth: status === 'success' ? '120px' : 'auto' }}>
+                  {status === 'loading' ? 'Sending...' : status === 'success' ? <><CheckCircle size={18} /> Sent</> : <>Get Guide <ArrowRight size={18} /></>}
+                </button>
+              </form>
             </div>
 
             <div className="trust-footer">

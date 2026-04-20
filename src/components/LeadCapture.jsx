@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Sparkles, CheckCircle } from 'lucide-react';
+import { sendEmail } from '../utils/sendEmail';
 
 const LeadCapture = () => {
+  const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!email) return;
+    setLoading(true);
+    try {
+      await sendEmail({
+        email,
+        subject: 'New Request: Growth Starter Kit',
+        html: `<p>A new user has requested the Lead Capture Growth Starter Kit.</p><p><strong>Email:</strong> ${email}</p>`
+      });
+      setSubmitted(true);
+      setEmail('');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,13 +64,15 @@ const LeadCapture = () => {
                     <Mail className="input-icon" size={20} />
                     <input 
                       type="email" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your best email" 
                       required 
                       className="lead-input"
                     />
                   </div>
-                  <button type="submit" className="btn-primary lead-btn">
-                    Send Me The Kit
+                  <button type="submit" className="btn-primary lead-btn" disabled={loading}>
+                    {loading ? 'Sending...' : 'Send Me The Kit'}
                   </button>
                 </form>
                 
